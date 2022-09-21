@@ -1,4 +1,6 @@
-export default class OrderItem {
+import OrderItemInterface from "./order_item.interface";
+
+export default class OrderItem implements OrderItemInterface {
   private _id: string;
   private _productId: string;
   private _name: string;
@@ -36,6 +38,6 @@ export default class OrderItem {
   }
 
   get price(): number {
-    return this._price * this._quantity;
+    return this._price;
   }
 }
