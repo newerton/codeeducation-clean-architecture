@@ -70,4 +70,16 @@ describe("Unit test create product use case", () => {
       "price must be a `number` type, but the final value was: `NaN`."
     );
   });
+
+  it("should thrown an error when name and price is missing", async () => {
+    const productRepository = new ProductRepository();
+    const productCreateUseCase = new CreateProductUseCase(productRepository);
+
+    input.name = "";
+    input.price = -1;
+
+    await expect(productCreateUseCase.execute(input)).rejects.toThrow(
+      "product: Name is required,product: Price must be greater than zero"
+    );
+  });
 });
