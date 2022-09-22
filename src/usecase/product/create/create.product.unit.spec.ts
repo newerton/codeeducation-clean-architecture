@@ -1,7 +1,7 @@
 import CreateProductUseCase from "./create.product.usecase";
 const input = {
   name: "Product",
-  price: 10
+  price: 10,
 };
 
 const MockRepository = () => {
@@ -55,6 +55,17 @@ describe("Unit test create product use case", () => {
     await expect(productCreateUseCase.execute(input)).rejects.toThrow(
       "price must be a `number` type, but the final value was: `NaN`."
     );
-    
+  });
+
+  it("should thrown an error when name and price is missing", async () => {
+    const productRepository = MockRepository();
+    const productCreateUseCase = new CreateProductUseCase(productRepository);
+
+    input.name = "";
+    input.price = -1;
+
+    await expect(productCreateUseCase.execute(input)).rejects.toThrow(
+      "product: Name is required,product: Price must be greater than zero"
+    );
   });
 });
