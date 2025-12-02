@@ -8,7 +8,7 @@
     "@types/express": "^5.0.2",
     "@types/uuid": "^10.0.0",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0",
+    "express": "^5.2.0",
     "jstoxml": "^7.0.1",
     "nodemon": "^3.1.10",
     "reflect-metadata": "^0.2.2",
