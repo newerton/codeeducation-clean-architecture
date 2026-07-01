@@ -1,6 +1,7 @@
-import CreateProductUseCase from "./create.product.usecase";
+import CreateProductUseCase from './create.product.usecase';
+
 const input = {
-  name: "Product",
+  name: 'Product',
   price: 10,
 };
 
@@ -13,8 +14,8 @@ const MockRepository = () => {
   };
 };
 
-describe("Unit test create product use case", () => {
-  it("should create a product", async () => {
+describe('Unit test create product use case', () => {
+  it('should create a product', async () => {
     const productRepository = MockRepository();
     const productCreateUseCase = new CreateProductUseCase(productRepository);
 
@@ -27,45 +28,45 @@ describe("Unit test create product use case", () => {
     });
   });
 
-  it("should thrown an error when name is missing", async () => {
+  it('should thrown an error when name is missing', async () => {
     const productRepository = MockRepository();
     const productCreateUseCase = new CreateProductUseCase(productRepository);
 
-    input.name = "";
+    input.name = '';
 
     await expect(productCreateUseCase.execute(input)).rejects.toThrow(
-      "Name is required"
+      'Name is required',
     );
   });
 
-  it("should thrown an error when price is missing", async () => {
+  it('should thrown an error when price is missing', async () => {
     const productRepository = MockRepository();
     const productCreateUseCase = new CreateProductUseCase(productRepository);
 
-    input.name = "Product";
+    input.name = 'Product';
     input.price = -1;
 
     await expect(productCreateUseCase.execute(input)).rejects.toThrow(
-      "Price must be greater than zero"
+      'Price must be greater than zero',
     );
 
-    input.name = "Product";
+    input.name = 'Product';
     input.price = null;
 
     await expect(productCreateUseCase.execute(input)).rejects.toThrow(
-      "price must be a `number` type, but the final value was: `NaN`."
+      'price must be a `number` type, but the final value was: `NaN`.',
     );
   });
 
-  it("should thrown an error when name and price is missing", async () => {
+  it('should thrown an error when name and price is missing', async () => {
     const productRepository = MockRepository();
     const productCreateUseCase = new CreateProductUseCase(productRepository);
 
-    input.name = "";
+    input.name = '';
     input.price = -1;
 
     await expect(productCreateUseCase.execute(input)).rejects.toThrow(
-      "product: Name is required,product: Price must be greater than zero"
+      'product: Name is required,product: Price must be greater than zero',
     );
   });
 });

@@ -1,4 +1,4 @@
-import OrderItemInterface from "./order_item.interface";
+import OrderItemInterface from './order_item.interface';
 
 export default class OrderItem implements OrderItemInterface {
   private _id: string;
@@ -12,7 +12,7 @@ export default class OrderItem implements OrderItemInterface {
     name: string,
     price: number,
     productId: string,
-    quantity: number
+    quantity: number,
   ) {
     this._id = id;
     this._name = name;

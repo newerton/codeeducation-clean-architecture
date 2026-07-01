@@ -1,6 +1,6 @@
-import Product from "../entity/product";
-import { v4 as uuid } from "uuid";
-import { ProductFactoryProps } from "../../customer/factory/customer.factory.interface";
+import { v4 as uuid } from 'uuid';
+import { ProductFactoryProps } from '../../customer/factory/customer.factory.interface';
+import Product from '../entity/product';
 
 export default class ProductFactory {
   public static create(props: ProductFactoryProps): Product {

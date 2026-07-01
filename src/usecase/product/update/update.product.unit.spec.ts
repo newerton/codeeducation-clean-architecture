@@ -1,10 +1,11 @@
-import ProductFactory from "../../../domain/product/factory/product.factory";
-import UpdateProductUseCase from "./update.product.usecase";
-const product = ProductFactory.create({ name: "Product", price: 10 });
+import ProductFactory from '../../../domain/product/factory/product.factory';
+import UpdateProductUseCase from './update.product.usecase';
+
+const product = ProductFactory.create({ name: 'Product', price: 10 });
 
 const input = {
   id: product.id,
-  name: "Product Updated",
+  name: 'Product Updated',
   price: 20,
 };
 
@@ -17,8 +18,8 @@ const MockRepository = () => {
   };
 };
 
-describe("Unit test for product update use case", () => {
-  it("should update a product", async () => {
+describe('Unit test for product update use case', () => {
+  it('should update a product', async () => {
     const productRepository = MockRepository();
     const productUpdateUseCase = new UpdateProductUseCase(productRepository);
 

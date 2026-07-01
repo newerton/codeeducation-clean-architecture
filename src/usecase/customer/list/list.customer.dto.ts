@@ -1,4 +1,4 @@
-export interface InputListCustomerDto {}
+export type InputListCustomerDto = {};
 
 type Customer = {
   id: string;

@@ -1,7 +1,7 @@
-import Customer from "../../../../domain/customer/entity/customer";
-import Address from "../../../../domain/customer/value-object/address";
-import CustomerRepositoryInterface from "../../../../domain/customer/repository/customer-repository.interface";
-import CustomerModel from "./customer.model";
+import Customer from '../../../../domain/customer/entity/customer';
+import CustomerRepositoryInterface from '../../../../domain/customer/repository/customer-repository.interface';
+import Address from '../../../../domain/customer/value-object/address';
+import CustomerModel from './customer.model';
 
 export default class CustomerRepository implements CustomerRepositoryInterface {
   async create(entity: Customer): Promise<void> {
@@ -32,7 +32,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
         where: {
           id: entity.id,
         },
-      }
+      },
     );
   }
 
@@ -45,8 +45,8 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
         },
         rejectOnEmpty: true,
       });
-    } catch (error) {
-      throw new Error("Customer not found");
+    } catch (_error) {
+      throw new Error('Customer not found');
     }
 
     const customer = new Customer(id, customerModel.name);
@@ -54,7 +54,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
       customerModel.street,
       customerModel.number,
       customerModel.zipcode,
-      customerModel.city
+      customerModel.city,
     );
     customer.changeAddress(address);
     return customer;
@@ -64,13 +64,13 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
     const customerModels = await CustomerModel.findAll();
 
     const customers = customerModels.map((customerModels) => {
-      let customer = new Customer(customerModels.id, customerModels.name);
+      const customer = new Customer(customerModels.id, customerModels.name);
       customer.addRewardPoints(customerModels.rewardPoints);
       const address = new Address(
         customerModels.street,
         customerModels.number,
         customerModels.zipcode,
-        customerModels.city
+        customerModels.city,
       );
       customer.changeAddress(address);
       if (customerModels.active) {

@@ -1,5 +1,5 @@
-import Order from "../entity/order";
-import OrderItem from "../entity/order_item";
+import Order from '../entity/order';
+import OrderItem from '../entity/order_item';
 
 interface OrderFactoryProps {
   id: string;
@@ -21,11 +21,10 @@ export default class OrderFactory {
         item.name,
         item.price,
         item.productId,
-        item.quantity
+        item.quantity,
       );
     });
-    
-    return new Order(props.id, props.customerId, items);
 
+    return new Order(props.id, props.customerId, items);
   }
 }

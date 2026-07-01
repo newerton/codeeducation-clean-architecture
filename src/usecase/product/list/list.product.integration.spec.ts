@@ -1,26 +1,26 @@
-import { Sequelize } from "sequelize-typescript";
-import ProductFactory from "../../../domain/product/factory/product.factory";
-import ProductModel from "../../../infrastructure/product/repository/sequelize/product.model";
-import ProductRepository from "../../../infrastructure/product/repository/sequelize/product.repository";
-import ListProductUseCase from "./list.product.usecase";
+import { Sequelize } from 'sequelize-typescript';
+import ProductFactory from '../../../domain/product/factory/product.factory';
+import ProductModel from '../../../infrastructure/product/repository/sequelize/product.model';
+import ProductRepository from '../../../infrastructure/product/repository/sequelize/product.repository';
+import ListProductUseCase from './list.product.usecase';
 
 const product1 = ProductFactory.create({
-  name: "Product 1",
+  name: 'Product 1',
   price: 10,
 });
 
 const product2 = ProductFactory.create({
-  name: "Product 2",
+  name: 'Product 2',
   price: 20,
 });
 
-describe("Unit test for listing product use case", () => {
+describe('Unit test for listing product use case', () => {
   let sequelize: Sequelize;
 
   beforeEach(async () => {
     sequelize = new Sequelize({
-      dialect: "sqlite",
-      storage: ":memory:",
+      dialect: 'sqlite',
+      storage: ':memory:',
       logging: false,
       sync: { force: true },
     });
@@ -32,8 +32,8 @@ describe("Unit test for listing product use case", () => {
   afterEach(async () => {
     await sequelize.close();
   });
-  
-  it("should list a customer", async () => {
+
+  it('should list a customer', async () => {
     const repository = new ProductRepository();
 
     await repository.create(product1);

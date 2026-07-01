@@ -1,8 +1,8 @@
-import Order from "../../../../domain/checkout/entity/order";
-import OrderItem from "../../../../domain/checkout/entity/order_item";
-import OrderRepositoryInterface from "../../../../domain/checkout/repository/order-repository.interface";
-import OrderItemModel from "./order-item.model";
-import OrderModel from "./order.model";
+import Order from '../../../../domain/checkout/entity/order';
+import OrderItem from '../../../../domain/checkout/entity/order_item';
+import OrderRepositoryInterface from '../../../../domain/checkout/repository/order-repository.interface';
+import OrderModel from './order.model';
+import OrderItemModel from './order-item.model';
 
 export default class OrderRepository implements OrderRepositoryInterface {
   async create(entity: Order): Promise<void> {
@@ -21,14 +21,14 @@ export default class OrderRepository implements OrderRepositoryInterface {
       },
       {
         include: [{ model: OrderItemModel }],
-      }
+      },
     );
   }
 
   async update(entity: Order): Promise<void> {
     const order = await this.find(entity.id);
     if (!order) {
-      throw new Error("Order not found");
+      throw new Error('Order not found');
     }
 
     await OrderModel.update(
@@ -39,7 +39,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
         where: {
           id: entity.id,
         },
-      }
+      },
     );
 
     if (entity.items) {
@@ -52,7 +52,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
             price: item.price,
             product_id: item.productId,
             quantity: item.quantity,
-          })
+          }),
       );
     }
   }
@@ -63,7 +63,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
       include: [{ model: OrderItemModel }],
     });
     if (!orderModel) {
-      throw new Error("Order not found");
+      throw new Error('Order not found');
     }
 
     const items = orderModel.items.map(
@@ -73,14 +73,14 @@ export default class OrderRepository implements OrderRepositoryInterface {
           item.name,
           item.price,
           item.product_id,
-          item.quantity
-        )
+          item.quantity,
+        ),
     );
     return new Order(orderModel.id, orderModel.customer_id, items);
   }
 
   async findAll(): Promise<Order[]> {
-    const orderModels = await OrderModel.findAll({ include: ["items"] });
+    const orderModels = await OrderModel.findAll({ include: ['items'] });
     return orderModels.map((orderModel) => {
       const items = orderModel.items.map(
         (item) =>
@@ -89,8 +89,8 @@ export default class OrderRepository implements OrderRepositoryInterface {
             item.name,
             item.price,
             item.product_id,
-            item.quantity
-          )
+            item.quantity,
+          ),
       );
       return new Order(orderModel.id, orderModel.customer_id, items);
     });

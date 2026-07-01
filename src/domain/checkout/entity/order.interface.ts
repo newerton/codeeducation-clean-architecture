@@ -1,4 +1,4 @@
-import OrderItem from "./order_item";
+import OrderItem from './order_item';
 
 export default interface OrderInterface {
   get id(): string;

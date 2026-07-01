@@ -1,8 +1,9 @@
-import ProductFactory from "../../../domain/product/factory/product.factory";
-import ListProductUseCase from "./list.product.usecase";
-const product1 = ProductFactory.create({ name: "Product 1", price: 10 });
+import ProductFactory from '../../../domain/product/factory/product.factory';
+import ListProductUseCase from './list.product.usecase';
 
-const product2 = ProductFactory.create({ name: "Product 2", price: 20 });
+const product1 = ProductFactory.create({ name: 'Product 1', price: 10 });
+
+const product2 = ProductFactory.create({ name: 'Product 2', price: 20 });
 
 const MockRepository = () => {
   return {
@@ -13,15 +14,15 @@ const MockRepository = () => {
   };
 };
 
-describe("Unit test for listing product use case", () => {
-  it("should list a product", async () => {
+describe('Unit test for listing product use case', () => {
+  it('should list a product', async () => {
     const repository = MockRepository();
     const useCase = new ListProductUseCase(repository);
 
     const output = await useCase.execute({});
 
     expect(output.products.length).toBe(2);
-    
+
     expect(output.products[0].id).toBe(product1.id);
     expect(output.products[0].name).toBe(product1.name);
     expect(output.products[0].price).toBe(product1.price);

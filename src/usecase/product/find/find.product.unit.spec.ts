@@ -1,7 +1,7 @@
-import Product from "../../../domain/product/entity/product";
-import FindProductUseCase from "./find.product.usecase";
+import Product from '../../../domain/product/entity/product';
+import FindProductUseCase from './find.product.usecase';
 
-const product = new Product("123", "Product", 10);
+const product = new Product('123', 'Product', 10);
 
 const MockRepository = () => {
   return {
@@ -12,18 +12,18 @@ const MockRepository = () => {
   };
 };
 
-describe("Unit Test find product use case", () => {
-  it("should find a product", async () => {
+describe('Unit Test find product use case', () => {
+  it('should find a product', async () => {
     const productRepository = MockRepository();
     const usecase = new FindProductUseCase(productRepository);
 
     const input = {
-      id: "123",
+      id: '123',
     };
 
     const output = {
-      id: "123",
-      name: "Product",
+      id: '123',
+      name: 'Product',
       price: 10,
     };
 
@@ -32,19 +32,19 @@ describe("Unit Test find product use case", () => {
     expect(result).toEqual(output);
   });
 
-  it("should not find a product", async () => {
+  it('should not find a product', async () => {
     const productRepository = MockRepository();
     productRepository.find.mockImplementation(() => {
-      throw new Error("Product not found");
+      throw new Error('Product not found');
     });
     const usecase = new FindProductUseCase(productRepository);
 
     const input = {
-      id: "123",
+      id: '123',
     };
 
     expect(() => {
       return usecase.execute(input);
-    }).rejects.toThrow("Product not found");
+    }).rejects.toThrow('Product not found');
   });
 });

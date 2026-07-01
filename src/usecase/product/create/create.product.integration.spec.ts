@@ -1,21 +1,21 @@
-import { Sequelize } from "sequelize-typescript";
-import ProductModel from "../../../infrastructure/product/repository/sequelize/product.model";
-import ProductRepository from "../../../infrastructure/product/repository/sequelize/product.repository";
-import { InputCreateProductDto } from "./create.product.dto";
-import CreateProductUseCase from "./create.product.usecase";
+import { Sequelize } from 'sequelize-typescript';
+import ProductModel from '../../../infrastructure/product/repository/sequelize/product.model';
+import ProductRepository from '../../../infrastructure/product/repository/sequelize/product.repository';
+import { InputCreateProductDto } from './create.product.dto';
+import CreateProductUseCase from './create.product.usecase';
 
 const input: InputCreateProductDto = {
-  name: "Product",
+  name: 'Product',
   price: 10,
 };
 
-describe("Unit test create product use case", () => {
+describe('Unit test create product use case', () => {
   let sequelize: Sequelize;
 
   beforeEach(async () => {
     sequelize = new Sequelize({
-      dialect: "sqlite",
-      storage: ":memory:",
+      dialect: 'sqlite',
+      storage: ':memory:',
       logging: false,
       sync: { force: true },
     });
@@ -28,7 +28,7 @@ describe("Unit test create product use case", () => {
     await sequelize.close();
   });
 
-  it("should create a product", async () => {
+  it('should create a product', async () => {
     const productRepository = new ProductRepository();
     const createProductUseCase = new CreateProductUseCase(productRepository);
 
@@ -41,45 +41,45 @@ describe("Unit test create product use case", () => {
     });
   });
 
-  it("should thrown an error when name is missing", async () => {
+  it('should thrown an error when name is missing', async () => {
     const productRepository = new ProductRepository();
     const createProductUseCase = new CreateProductUseCase(productRepository);
 
-    input.name = "";
+    input.name = '';
 
     await expect(createProductUseCase.execute(input)).rejects.toThrow(
-      "Name is required"
+      'Name is required',
     );
   });
 
-  it("should thrown an error when street is missing", async () => {
+  it('should thrown an error when street is missing', async () => {
     const productRepository = new ProductRepository();
     const createProductUseCase = new CreateProductUseCase(productRepository);
 
-    input.name = "Product";
+    input.name = 'Product';
     input.price = -1;
 
     await expect(createProductUseCase.execute(input)).rejects.toThrow(
-      "Price must be greater than zero"
+      'Price must be greater than zero',
     );
 
-    input.name = "Product";
+    input.name = 'Product';
     input.price = null;
 
     await expect(createProductUseCase.execute(input)).rejects.toThrow(
-      "price must be a `number` type, but the final value was: `NaN`."
+      'price must be a `number` type, but the final value was: `NaN`.',
     );
   });
 
-  it("should thrown an error when name and price is missing", async () => {
+  it('should thrown an error when name and price is missing', async () => {
     const productRepository = new ProductRepository();
     const productCreateUseCase = new CreateProductUseCase(productRepository);
 
-    input.name = "";
+    input.name = '';
     input.price = -1;
 
     await expect(productCreateUseCase.execute(input)).rejects.toThrow(
-      "product: Name is required,product: Price must be greater than zero"
+      'product: Name is required,product: Price must be greater than zero',
     );
   });
 });

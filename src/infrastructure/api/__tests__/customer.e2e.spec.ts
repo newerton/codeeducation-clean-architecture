@@ -1,7 +1,7 @@
-import { app, sequelize } from "../express";
-import request from "supertest";
+import request from 'supertest';
+import { app, sequelize } from '../express';
 
-describe("E2E test for customer", () => {
+describe('E2E test for customer', () => {
   beforeEach(async () => {
     await sequelize.sync({ force: true });
   });
@@ -10,78 +10,80 @@ describe("E2E test for customer", () => {
     await sequelize.close();
   });
 
-  it("should create a customer", async () => {
+  it('should create a customer', async () => {
     const response = await request(app)
-      .post("/customer")
+      .post('/customer')
       .send({
-        name: "John",
+        name: 'John',
         address: {
-          street: "Street",
-          city: "City",
+          street: 'Street',
+          city: 'City',
           number: 123,
-          zip: "12345",
+          zip: '12345',
         },
       });
 
     expect(response.status).toBe(200);
-    expect(response.body.name).toBe("John");
-    expect(response.body.address.street).toBe("Street");
-    expect(response.body.address.city).toBe("City");
+    expect(response.body.name).toBe('John');
+    expect(response.body.address.street).toBe('Street');
+    expect(response.body.address.city).toBe('City');
     expect(response.body.address.number).toBe(123);
-    expect(response.body.address.zip).toBe("12345");
+    expect(response.body.address.zip).toBe('12345');
   });
 
-  it("should not create a customer", async () => {
-    const response = await request(app).post("/customer").send({
-      name: "john",
+  it('should not create a customer', async () => {
+    const response = await request(app).post('/customer').send({
+      name: 'john',
     });
     expect(response.status).toBe(500);
   });
 
-  it("should list all customer", async () => {
+  it('should list all customer', async () => {
     const response = await request(app)
-      .post("/customer")
+      .post('/customer')
       .send({
-        name: "John",
+        name: 'John',
         address: {
-          street: "Street",
-          city: "City",
+          street: 'Street',
+          city: 'City',
           number: 123,
-          zip: "12345",
+          zip: '12345',
         },
       });
     expect(response.status).toBe(200);
     const response2 = await request(app)
-      .post("/customer")
+      .post('/customer')
       .send({
-        name: "Jane",
+        name: 'Jane',
         address: {
-          street: "Street 2",
-          city: "City 2",
+          street: 'Street 2',
+          city: 'City 2',
           number: 1234,
-          zip: "12344",
+          zip: '12344',
         },
       });
     expect(response2.status).toBe(200);
 
-    const listResponse = await request(app).get("/customer").send();
+    const listResponse = await request(app).get('/customer').send();
 
     expect(listResponse.status).toBe(200);
     expect(listResponse.body.customers.length).toBe(2);
     const customer = listResponse.body.customers[0];
-    expect(customer.name).toBe("John");
-    expect(customer.address.street).toBe("Street");
+    expect(customer.name).toBe('John');
+    expect(customer.address.street).toBe('Street');
     const customer2 = listResponse.body.customers[1];
-    expect(customer2.name).toBe("Jane");
-    expect(customer2.address.street).toBe("Street 2");
+    expect(customer2.name).toBe('Jane');
+    expect(customer2.address.street).toBe('Street 2');
 
     const listResponseXML = await request(app)
-    .get("/customer")
-    .set("Accept", "application/xml")
-    .send();
+      .get('/customer')
+      .set('Accept', 'application/xml')
+      .send();
 
     expect(listResponseXML.status).toBe(200);
-    expect(listResponseXML.text).toContain(`<?xml version="1.0" encoding="UTF-8"?>`);
+    expect(listResponseXML.text).toContain(
+      `<?xml version="1.0" encoding="UTF-8"?>`,
+    );
     expect(listResponseXML.text).toContain(`<customers>`);
     expect(listResponseXML.text).toContain(`<customer>`);
     expect(listResponseXML.text).toContain(`<name>John</name>`);
@@ -95,8 +97,5 @@ describe("E2E test for customer", () => {
     expect(listResponseXML.text).toContain(`<name>Jane</name>`);
     expect(listResponseXML.text).toContain(`<street>Street 2</street>`);
     expect(listResponseXML.text).toContain(`</customers>`);
-    
-
-    
   });
 });

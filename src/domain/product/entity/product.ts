@@ -1,6 +1,6 @@
-import Entity from "../../@shared/entity/entity.abstract";
-import NotificationError from "../../@shared/notification/notification.error";
-import ProductValidatorFactory from "../factory/product.validator.factory";
+import Entity from '../../@shared/entity/entity.abstract';
+import NotificationError from '../../@shared/notification/notification.error';
+import ProductValidatorFactory from '../factory/product.validator.factory';
 
 export default class Product extends Entity {
   private _name: string;

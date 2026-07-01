@@ -1,11 +1,10 @@
-import CustomerRepositoryInterface from "../../../domain/customer/repository/customer-repository.interface";
+import CustomerFactory from '../../../domain/customer/factory/customer.factory';
+import CustomerRepositoryInterface from '../../../domain/customer/repository/customer-repository.interface';
+import Address from '../../../domain/customer/value-object/address';
 import {
   InputCreateCustomerDto,
   OutputCreateCustomerDto,
-} from "./create.customer.dto";
-import { v4 as uuid } from "uuid";
-import CustomerFactory from "../../../domain/customer/factory/customer.factory";
-import Address from "../../../domain/customer/value-object/address";
+} from './create.customer.dto';
 
 export default class CreateCustomerUseCase {
   private customerRepository: CustomerRepositoryInterface;
@@ -15,7 +14,7 @@ export default class CreateCustomerUseCase {
   }
 
   async execute(
-    input: InputCreateCustomerDto
+    input: InputCreateCustomerDto,
   ): Promise<OutputCreateCustomerDto> {
     const customer = CustomerFactory.createWithAddress(
       input.name,
@@ -23,8 +22,8 @@ export default class CreateCustomerUseCase {
         input.address.street,
         input.address.number,
         input.address.zip,
-        input.address.city
-      )
+        input.address.city,
+      ),
     );
 
     await this.customerRepository.create(customer);

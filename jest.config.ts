@@ -5,8 +5,7 @@
 
 export default {
   transform: {
-    "^.+\.(t|j)sx?$": ["@swc/jest"],
-    
+    '^.+.(t|j)sx?$': ['@swc/jest'],
   },
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -35,7 +34,7 @@ export default {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
