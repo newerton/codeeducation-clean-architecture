@@ -10,7 +10,7 @@
     "@types/uuid": "^11.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "jstoxml": "^7.1.0",
+    "jstoxml": "^7.1.1",
     "nodemon": "^3.1.14",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.8",
@@ -20,9 +20,9 @@
     "yup": "^1.7.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.5",
+    "@biomejs/biome": "^2.5.6",
     "@swc/cli": "^0.8.1",
-    "@swc/core": "^1.15.46",
+    "@swc/core": "^1.15.47",
     "@swc/jest": "^0.2.39",
     "@types/jest": "^30.0.0",
     "@types/jstoxml": "^5.0.0",
@@ -41,7 +41,7 @@
     "semver": "^7.7.2",
     "tar": "^7.4.3",
     "piscina": "^5.2.0",
-    "brace-expansion": "^5.0.7",
+    "brace-expansion": "^5.0.9",
     "diff": "^9.0.0",
     "body-parser": "^2.3.0"
   }
