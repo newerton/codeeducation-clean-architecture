@@ -40,7 +40,7 @@
     "micromatch": "^4.0.8",
     "semver": "^7.7.2",
     "tar": "^7.4.3",
-    "piscina": "^5.2.0",
+    "piscina": "^5.3.2",
     "brace-expansion": "^5.0.12",
     "diff": "^9.0.0",
     "body-parser": "^2.3.0",
